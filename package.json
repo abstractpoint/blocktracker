@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "dev": "parcel src/client/index.html",
-    "build": "rm -rf build && parcel build src/client/index.html -d build"
+    "build": "rm -rf build && parcel build src/client/index.html -d build",
+    "analyze": "source-map-explorer build/*",
+    "ganache": "ganache-cli"
   },
   "author": "",
   "license": "ISC",
@@ -25,12 +27,18 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-standard": "^4.0.1",
     "jest": "^24.9.0",
-    "parcel": "^1.12.3"
+    "parcel-bundler": "^1.12.4",
+    "source-map-explorer": "^2.1.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "dotenv": "^8.2.0",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "ethers": "^4.0.37",
+    "lodash.throttle": "^4.1.1",
+    "polished": "^3.4.1",
+    "react": ">= 16.3.0",
+    "react-dom": ">= 16.3.0",
+    "react-router-dom": "^5.1.2",
+    "styled-blocks": "^1.0.2",
+    "styled-components": "^4.4.0"
   }
 }
