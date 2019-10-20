@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { Block } from 'styled-blocks';
 
 const BlockWithShadow = styled(Block)`
@@ -27,14 +27,36 @@ const BlockContainer = ({ children, width = 'unset' }) => (
     {children}
   </BlockWithShadow>
 );
+// Create the keyframes
+const rotate = keyframes`
+  from {
+    transform: scale(0);
+    background: #ff41b4;
+    opacity: 0.7;
+  }
+  
+  70% {
+    transform: scale(1.2);
+  }
 
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 const BlockSection = styled(Block)`
   border-top: none;
+  animation: ${({ animation }) => (animation === 'entering' ? css`${rotate} 0.3s linear` : 'none')};
   & + & {
     border-top: solid;
     border-width: 1px;
     border-color: ${({ theme }) => theme.colors['near-white']}
   }
+  ${({ hover }) => hover && css`
+    :hover {
+      background: ${({ theme }) => theme.colors['near-white']};
+    }
+  `}
 `;
 
 BlockContainer.Section = BlockSection;

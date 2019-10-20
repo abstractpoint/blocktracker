@@ -8,11 +8,9 @@ import { timeAgo } from '../../utils';
 import BlockContainer from '../block-container';
 
 const LinkBlock = ({ number, timestamp }) => (
-  <Transition key={number} timeout={1000}>
+  <Transition key={number} timeout={2000}>
     {(state) => (
-      <BlockContainer.Section
-        _background={state === 'entering' ? 'yellow' : 'white'}
-      >
+      <BlockContainer.Section animation={state} hover>
         <Link to={`/block/${number}`}>
           <Row
             _padding="spacing.4"
