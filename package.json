@@ -1,5 +1,5 @@
 {
-  "name": "whaletracking",
+  "name": "blocktracker",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "dev": "parcel src/client/index.html",
-    "build": "rm -rf build && parcel build src/client/index.html -d build",
+    "build": "rm -rf build && parcel build src/client/index.html -d public --no-source-maps",
     "analyze": "source-map-explorer build/*",
     "ganache": "ganache-cli"
   },
