@@ -3,7 +3,7 @@ import * as Comlink from 'comlink';
 
 const DEFAULT_BLOCKS = 10;
 
-const initProvider = () => {
+export const initProvider = () => {
   if (window.web3 && window.web3.currentProvider) {
     return new ethers.providers.Web3Provider(window.web3.currentProvider);
   }

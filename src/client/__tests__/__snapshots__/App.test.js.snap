@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Should render without error 1`] = `
+"<div class=\\"sc-bwzfXH fXkOtp\\">
+  <div class=\\"sc-htpNat dURhdG\\"><img src=\\"\\" alt=\\"whale logo (credit IFAW)\\" class=\\"sc-bwzfXH gLvYDQ\\">
+    <div class=\\"sc-htoDjs kBpCXH\\">
+      <div class=\\"sc-bwzfXH sc-dnqmqq elwQke\\">
+        <div class=\\"sc-bwzfXH sc-iwsKbI fEddsE\\">
+          <h2>Stats</h2>
+        </div>
+        <div class=\\"sc-bwzfXH sc-iwsKbI fEddsE\\"></div>
+      </div>
+      <div class=\\"sc-bwzfXH sc-dnqmqq gWDzYm\\"></div>
+    </div>
+  </div>
+</div>"
+`;

@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx}",
     "lint": "eslint src",
     "dev": "parcel src/client/index.html",
     "build": "rm -rf build && parcel build src/client/index.html -d public --no-source-maps",
@@ -14,6 +14,18 @@
   },
   "author": "",
   "license": "ISC",
+  "jest": {
+    "globals": {
+      "window": true
+    },
+    "setupFiles": [
+      "<rootDir>/jest/globals.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest/fileMocks.js",
+      "\\.(css|less)$": "<rootDir>/jest/fileMocks.js"
+    }
+  },
   "devDependencies": {
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.3",
@@ -21,6 +33,7 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.19.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
@@ -28,6 +41,8 @@
     "eslint-plugin-standard": "^4.0.1",
     "jest": "^24.9.0",
     "parcel-bundler": "^1.12.4",
+    "pretty": "^2.0.0",
+    "react-test-renderer": "^16.10.2",
     "source-map-explorer": "^2.1.0"
   },
   "dependencies": {

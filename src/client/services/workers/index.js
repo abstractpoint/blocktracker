@@ -1,8 +1,10 @@
 import * as Comlink from 'comlink';
 import { utils } from 'ethers';
 
-const obj = {
+const worker = {
   parseTransactions: transactions => transactions.map(each => utils.parseTransaction(each)),
 };
 
-Comlink.expose(obj);
+Comlink.expose(worker);
+
+export default worker;
