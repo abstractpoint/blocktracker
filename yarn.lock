@@ -1621,6 +1621,10 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
+comlink@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/comlink/-/comlink-4.0.5.tgz#9cbbdf69329d584ab952cc66341441081d9e542f"
+
 command-exists@^1.2.6:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/command-exists/-/command-exists-1.2.8.tgz#715acefdd1223b9c9b37110a149c6392c2852291"

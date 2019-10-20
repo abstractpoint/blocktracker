@@ -4,37 +4,40 @@ import {
   BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 import themeObj from './theme';
-import provider from './services/ethereum';
+import { pullLatestBlocks } from './services/ethereum';
 import Home from './scenes/home';
 import Details from './scenes/details';
 import GlobalStyles from './components/global-styles';
+import { getAverageTimePerBlock, getAverageTxPerBlock } from './utils';
 
 function App() {
   const [blocks, setBlocks] = useState([]);
+  const [blockStats, setBlockStats] = useState({
+    blockAverageSeconds: undefined,
+    blockAverageTxNo: undefined,
+  });
 
   const loadInitialBlocks = () => {
-    if (blocks.length > 0) {
-      return;
-    }
+    const untilBlock = blocks.length > 0 && blocks[0].number;
+    pullLatestBlocks(untilBlock).then(newBlocks => {
+      const combinedBlocks = [
+        ...newBlocks,
+        ...blocks.slice(0, 19),
+      ];
 
-    provider.getBlockNumber().then(latestBlockHeight => {
-      const blocksToGet = Array(3).fill(true).map((value, i) => latestBlockHeight - i - 1);
-
-      const blockPromises = blocksToGet.map(blockHeight => provider.getBlock(blockHeight));
-
-      Promise.all(blockPromises).then(newBlocks => {
-        setBlocks(() => ([
-          ...newBlocks,
-        ]));
+      setBlocks(combinedBlocks);
+      setBlockStats({
+        blockAverageSeconds: getAverageTimePerBlock(combinedBlocks),
+        blockAverageTxNo: getAverageTxPerBlock(combinedBlocks),
       });
     });
   };
 
-  const clearBlocks = () => {
-    setBlocks([]);
-  };
-
-  useEffect(loadInitialBlocks, [blocks]);
+  useEffect(loadInitialBlocks, []);
+  useEffect(() => {
+    const interval = setInterval(loadInitialBlocks, 4000);
+    return () => clearInterval(interval);
+  }, [blocks]);
 
   return (
     <ThemeProvider theme={themeObj}>
@@ -44,10 +47,10 @@ function App() {
           <Route
             path="/block/:number"
             render={
-              () => <Details blocks={blocks} clearBlocks={clearBlocks} />
+              () => <Details blocks={blocks} />
             }
           />
-          <Route path="/" render={() => <Home blocks={blocks} />} />
+          <Route path="/" render={() => <Home blocks={blocks} blockStats={blockStats} />} />
         </Switch>
       </Router>
     </ThemeProvider>

@@ -5,6 +5,7 @@ import {
 import { Block, Col, Row } from 'styled-blocks';
 import logo from '../../static/whale-logo.png';
 import BlockContainer from '../../components/block-container';
+import Stats from '../../components/stats';
 
 const LinkBlock = ({ number, timestamp }) => (
   <BlockContainer.Section key={number}>
@@ -22,7 +23,7 @@ const LinkBlock = ({ number, timestamp }) => (
 );
 
 
-function Home({ blocks }) {
+function Home({ blocks, blockStats }) {
   return (
     <Block
       _padding="spacing.2"
@@ -50,9 +51,10 @@ function Home({ blocks }) {
               <h2>Stats</h2>
             </BlockContainer.Section>
             <BlockContainer.Section
-              _padding="spacing.4"
+              _paddingLeft="spacing.4"
+              _paddingRight="spacing.4"
             >
-              <p>Lorem ipsum dolor</p>
+              <Stats blockStats={blockStats} />
             </BlockContainer.Section>
           </BlockContainer>
           <BlockContainer width={['100%', '100%', 'spacing.7']}>
