@@ -20,15 +20,23 @@ const Details = ({ blocks }) => {
   }, []);
 
   useEffect(() => {
+    let active = true;
     if (!currentBlock) {
       getBlockViaService(Number(number)).then(block => {
-        setCurrentBlock(block);
+        if (active) {
+          setCurrentBlock(block);
+        }
       });
     } else {
       getTransactionsViaService(currentBlock)
         .then(parseTransactions)
-        .then(setBlockTransactions);
+        .then(txs => {
+          if (active) {
+            setBlockTransactions(txs);
+          }
+        });
     }
+    return () => { active = false; };
   }, [currentBlock]);
 
   return (
