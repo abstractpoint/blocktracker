@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 import themeObj from './theme';
-import { pullLatestBlocks } from './services/ethereum';
+import { getLatestBlocksViaService } from './services/ethereum';
 import Home from './scenes/home';
 import Details from './scenes/details';
 import GlobalStyles from './components/global-styles';
@@ -19,7 +19,7 @@ function App() {
 
   const loadInitialBlocks = () => {
     const untilBlock = blocks.length > 0 && blocks[0].number;
-    pullLatestBlocks(untilBlock).then(newBlocks => {
+    getLatestBlocksViaService(untilBlock).then(newBlocks => {
       const combinedBlocks = [
         ...newBlocks,
         ...blocks.slice(0, 19),

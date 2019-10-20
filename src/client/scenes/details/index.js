@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { utils } from 'ethers';
 import { Block, Col } from 'styled-blocks';
-import { singleProvider as provider, parseTransactions } from '../../services/ethereum';
+import { parseTransactions, getTransactionsViaService, getBlockViaService } from '../../services/ethereum';
 import BlockContainer from '../../components/block-container';
 
 const getBlock = blocks => number => blocks.find(el => el.number === number);
@@ -21,12 +21,11 @@ const Details = ({ blocks }) => {
 
   useEffect(() => {
     if (!currentBlock) {
-      provider.getBlock(Number(number)).then(block => {
+      getBlockViaService(Number(number)).then(block => {
         setCurrentBlock(block);
       });
     } else {
-      Promise.all(currentBlock.transactions.map(each => provider.getTransaction(each)))
-        .then(transactions => transactions.map(t => t.raw))
+      getTransactionsViaService(currentBlock)
         .then(parseTransactions)
         .then(setBlockTransactions);
     }
