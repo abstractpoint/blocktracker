@@ -1,6 +1,6 @@
 import RelativeTimeFormat from 'relative-time-format';
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 
 RelativeTimeFormat.addLocale(en);
 TimeAgo.addLocale(en);

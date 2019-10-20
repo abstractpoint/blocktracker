@@ -1,27 +1,10 @@
 import React from 'react';
-import {
-  Link,
-} from 'react-router-dom';
 import { Block, Col, Row } from 'styled-blocks';
+import { TransitionGroup } from 'react-transition-group';
 import logo from '../../static/whale-logo.png';
-import BlockContainer from '../../components/block-container';
 import Stats from '../../components/stats';
-
-const LinkBlock = ({ number, timestamp }) => (
-  <BlockContainer.Section key={number}>
-    <Link to={`/block/${number}`}>
-      <Block
-        _padding="spacing.4"
-      >
-        {number}
-        {' '}
--
-        {timestamp}
-      </Block>
-    </Link>
-  </BlockContainer.Section>
-);
-
+import LinkBlock from '../../components/link-block';
+import BlockContainer from '../../components/block-container';
 
 function Home({ blocks, blockStats }) {
   return (
@@ -58,7 +41,9 @@ function Home({ blocks, blockStats }) {
             </BlockContainer.Section>
           </BlockContainer>
           <BlockContainer width={['100%', '100%', 'spacing.7']}>
-            {blocks.map(LinkBlock)}
+            <TransitionGroup component={null}>
+              {blocks.map(LinkBlock)}
+            </TransitionGroup>
           </BlockContainer>
         </Row>
       </Col>
