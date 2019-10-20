@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { utils } from 'ethers';
-import { Block, Col } from 'styled-blocks';
+import { Block, Col, Row } from 'styled-blocks';
 import { parseTransactions, getTransactionsViaService, getBlockViaService } from '../../services/ethereum';
 import BlockContainer from '../../components/block-container';
+import Skeleton from '../../components/transactions-skeleton';
 
 const getBlock = blocks => number => blocks.find(el => el.number === number);
 
@@ -48,7 +49,7 @@ const Details = ({ blocks }) => {
           <BlockContainer.Section
             _padding="spacing.4"
           >
-            <Link to="/">Home</Link>
+            <Link to="/">Back</Link>
           </BlockContainer.Section>
           <BlockContainer.Section
             _paddingLeft="spacing.4"
@@ -66,17 +67,36 @@ const Details = ({ blocks }) => {
             <Block
               _overflow="auto"
             >
-              {blockTransactions && blockTransactions
+              {blockTransactions && (
+                <Row
+                  _justifyContent="space-between"
+                >
+                  <Block _fontWeight="bold">Hash</Block>
+                  <Block _fontWeight="bold">Eth Amount</Block>
+                </Row>
+              )}
+              {blockTransactions ? blockTransactions
                 .filter(({ data }) => data === '0x')
                 .map(each => (
-                  <div key={each.hash}>
-                    {each.hash}
-                    {' '}
-              -
-                    {' '}
-                    {utils.formatEther(each.value)}
-                  </div>
-                ))}
+                  <Row
+                    key={each.hash}
+                    _justifyContent="space-between"
+                  >
+                    <Block
+                      _textOverflow="ellipsis"
+                      _overflow="hidden"
+                    >
+                      {each.hash}
+                    </Block>
+                    <Block
+                      _fontWeight="bold"
+                      _paddingLeft="spacing.2"
+                    >
+                      {utils.formatEther(each.value)}
+                    </Block>
+                  </Row>
+                ))
+                : (<Skeleton />)}
             </Block>
           </BlockContainer.Section>
         </BlockContainer>
