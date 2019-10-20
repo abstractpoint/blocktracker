@@ -34,11 +34,14 @@
     "babel-polyfill": "^6.26.0",
     "comlink": "^4.0.5",
     "ethers": "^4.0.37",
+    "javascript-time-ago": "^2.0.3",
     "lodash.throttle": "^4.1.1",
     "polished": "^3.4.1",
     "react": ">= 16.3.0",
     "react-dom": ">= 16.3.0",
     "react-router-dom": "^5.1.2",
+    "react-transition-group": "^4.3.0",
+    "relative-time-format": "^1.0.5",
     "styled-blocks": "^1.0.2",
     "styled-components": "^4.4.0"
   }

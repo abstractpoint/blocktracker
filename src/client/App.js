@@ -20,16 +20,18 @@ function App() {
   const loadInitialBlocks = () => {
     const untilBlock = blocks.length > 0 && blocks[0].number;
     getLatestBlocksViaService(untilBlock).then(newBlocks => {
-      const combinedBlocks = [
-        ...newBlocks,
-        ...blocks.slice(0, 19),
-      ];
+      if (newBlocks.length > 0) {
+        const combinedBlocks = [
+          ...newBlocks,
+          ...blocks.slice(0, 19),
+        ];
 
-      setBlocks(combinedBlocks);
-      setBlockStats({
-        blockAverageSeconds: getAverageTimePerBlock(combinedBlocks),
-        blockAverageTxNo: getAverageTxPerBlock(combinedBlocks),
-      });
+        setBlocks(combinedBlocks);
+        setBlockStats({
+          blockAverageSeconds: getAverageTimePerBlock(combinedBlocks),
+          blockAverageTxNo: getAverageTxPerBlock(combinedBlocks),
+        });
+      }
     });
   };
 
