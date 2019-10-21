@@ -8,6 +8,45 @@ import Skeleton from '../../components/transactions-skeleton';
 
 const getBlock = blocks => number => blocks.find(el => el.number === number);
 
+const TransactionsBlock = ({ transactions }) => {
+  const filteredTx = transactions.filter(({ data }) => data === '0x');
+
+  if (filteredTx.length === 0) {
+    return (
+      <Block
+        _padding="spacing.4"
+        _marginTop="spacing.4"
+        _marginBottom="spacing.4"
+        _backgroundColor="colors.light-gray"
+        _borderRadius="0.25rem"
+        _textAlign="center"
+      >
+        No Ether transactions in this block
+      </Block>
+    );
+  }
+
+  return filteredTx.map(each => (
+    <Row
+      key={each.hash}
+      _justifyContent="space-between"
+    >
+      <Block
+        _textOverflow="ellipsis"
+        _overflow="hidden"
+      >
+        {each.hash}
+      </Block>
+      <Block
+        _fontWeight="bold"
+        _paddingLeft="spacing.2"
+      >
+        {utils.formatEther(each.value)}
+      </Block>
+    </Row>
+  ));
+};
+
 const Details = ({ blocks }) => {
   const { number } = useParams();
   const [currentBlock, setCurrentBlock] = useState(undefined);
@@ -75,28 +114,9 @@ const Details = ({ blocks }) => {
                   <Block _fontWeight="bold">Eth Amount</Block>
                 </Row>
               )}
-              {blockTransactions ? blockTransactions
-                .filter(({ data }) => data === '0x')
-                .map(each => (
-                  <Row
-                    key={each.hash}
-                    _justifyContent="space-between"
-                  >
-                    <Block
-                      _textOverflow="ellipsis"
-                      _overflow="hidden"
-                    >
-                      {each.hash}
-                    </Block>
-                    <Block
-                      _fontWeight="bold"
-                      _paddingLeft="spacing.2"
-                    >
-                      {utils.formatEther(each.value)}
-                    </Block>
-                  </Row>
-                ))
-                : (<Skeleton />)}
+              {blockTransactions
+                ? <TransactionsBlock transactions={blockTransactions} />
+                : <Skeleton />}
             </Block>
           </BlockContainer.Section>
         </BlockContainer>

@@ -35,8 +35,13 @@ const rotate = keyframes`
     opacity: 0.7;
   }
   
-  70% {
+  50% {
     transform: scale(1.2);
+  }
+  
+  60% {
+    transform: scale(1);
+    opacity: 1;
   }
 
   to {
@@ -46,7 +51,7 @@ const rotate = keyframes`
 `;
 const BlockSection = styled(Block)`
   border-top: none;
-  animation: ${({ animation }) => (animation === 'entering' ? css`${rotate} 0.3s linear` : 'none')};
+  animation: ${({ animation }) => (animation === 'entering' ? css`${rotate} 1s ease-out` : 'none')};
   & + & {
     border-top: solid;
     border-width: 1px;
@@ -54,7 +59,7 @@ const BlockSection = styled(Block)`
   }
   ${({ hover }) => hover && css`
     :hover {
-      background: ${({ theme }) => theme.colors['near-white']};
+      background: ${({ theme }) => theme.colors['lightest-blue']};
     }
   `}
 `;

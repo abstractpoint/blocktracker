@@ -4,6 +4,7 @@ import { TransitionGroup } from 'react-transition-group';
 import logo from '../../static/whale-logo.png';
 import Stats from '../../components/stats';
 import LinkBlock from '../../components/link-block';
+import LinkBlockPlaceholder from '../../components/link-block-placeholder';
 import BlockContainer from '../../components/block-container';
 
 function Home({ blocks, blockStats }) {
@@ -17,7 +18,7 @@ function Home({ blocks, blockStats }) {
           _padding="spacing.3"
           _alignSelf="center"
           _borderRadius="10%"
-          _maxHeight={['spacing.5', 'spacing.6', 'spacing.6']}
+          _height={['spacing.5', 'spacing.6', 'spacing.6']}
           src={logo}
           alt="whale logo (credit IFAW)"
         />
@@ -41,6 +42,10 @@ function Home({ blocks, blockStats }) {
             </BlockContainer.Section>
           </BlockContainer>
           <BlockContainer width={['100%', '100%', 'spacing.7']}>
+            {blocks[0] && <LinkBlockPlaceholder
+              average={blockStats.blockAverageSeconds}
+              lastBlock={blocks[0].number}
+            />}
             <TransitionGroup component={null}>
               {blocks.map(LinkBlock)}
             </TransitionGroup>
