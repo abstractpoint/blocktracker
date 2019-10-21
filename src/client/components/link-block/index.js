@@ -8,6 +8,7 @@ import { timeAgo } from '../../utils';
 import BlockContainer from '../block-container';
 
 const LinkBlock = ({ number, timestamp }) => (
+  number && (
   <Transition key={number} timeout={2000}>
     {(state) => (
       <BlockContainer.Section animation={state} hover>
@@ -27,6 +28,7 @@ const LinkBlock = ({ number, timestamp }) => (
       </BlockContainer.Section>
     )}
   </Transition>
+  )
 );
 
 export default LinkBlock;
