@@ -12,7 +12,7 @@ describe('Worker', () => {
       '0FAD3DFA',
       '1FAD3DFA',
       '2FAD3DFA',
-    ]
+    ];
     const result = worker.parseTransactions(transactions);
     expect(result).toEqual([
       'parsed0FAD3DFA',
@@ -20,4 +20,4 @@ describe('Worker', () => {
       'parsed2FAD3DFA',
     ]);
   });
-})
+});

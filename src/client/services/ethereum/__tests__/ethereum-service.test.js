@@ -3,14 +3,14 @@ import {
   initProvider,
   getLatestBlocksViaService,
   getTransactionsViaService,
-  getBlockViaService ,
+  getBlockViaService,
 } from '../index';
 
 jest.mock('ethers', () => ({
   ethers: {
     getDefaultProvider: jest.fn(() => ({
       getBlockNumber: jest.fn(() => Promise.resolve(104)),
-      getBlock: jest.fn(() => Promise.resolve({ number: 123})),
+      getBlock: jest.fn(() => Promise.resolve({ number: 123 })),
       getTransaction: jest.fn(() => Promise.resolve({ raw: '000000000000' })),
     })),
     providers: {
@@ -28,7 +28,7 @@ describe('Ethereum Service', () => {
   });
 
   test('Sets up a metamask supplied provider', () => {
-    window.web3 = { currentProvider: {}};
+    window.web3 = { currentProvider: {} };
     expect(initProvider()).toEqual(expect.any(Object));
   });
 

@@ -42,10 +42,12 @@ function Home({ blocks, blockStats }) {
             </BlockContainer.Section>
           </BlockContainer>
           <BlockContainer width={['100%', '100%', 'spacing.7']}>
-            {blocks[0] && <LinkBlockPlaceholder
-              average={blockStats.blockAverageSeconds}
-              lastBlock={blocks[0].number}
-            />}
+            {blocks[0] && (
+              <LinkBlockPlaceholder
+                average={blockStats.blockAverageSeconds}
+                lastBlock={blocks[0].number}
+              />
+            )}
             <TransitionGroup component={null}>
               {blocks.map(LinkBlock)}
             </TransitionGroup>

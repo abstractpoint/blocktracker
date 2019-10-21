@@ -11,7 +11,7 @@ export const getAverageTimePerBlock = blocks => {
     return [acc[0] + difference, next];
   }, [0, undefined]);
 
-  return totalTimeInSeconds / blocks.length - 1;
+  return totalTimeInSeconds / (blocks.length - 1);
 };
 
 export const getAverageTxPerBlock = blocks => {
